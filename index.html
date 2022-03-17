@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <title>Who is in the building?</title>
+        <script src="jquery-3.6.0.min.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id='root'>
+            <h1>List of people in the Step by Step Centre</h1>
+            <p id="list-para">
+                <h3>Who is in the building right now</h3>
+                <ul id="5list">
+                </ul>
+                <h3>Who was in the building 10 minutes ago</h3>
+                <ul id="10list"> 
+                </ul>
+                <h3>Who was in the building 15 minutes ago</h3>
+                <ul id="15list"> 
+                </ul>
+                <h3>Who was in the building 20 minutes ago</h3>
+                <ul id="20list"> 
+                </ul>
+                <button id="list-button" onclick="sendWho()">Reload list</button>
+            </p>
+        </div>
+    <script>
+        // $(document).ready(function() {
+        //     document.getElementById('list-para').innerHTML = 'Retrieving Data...'
+        //     fetch('http://localhost:3000/api/who')
+        //     .then(response => {
+        //         console.log('first response received')
+        //         return response.json()
+        //     }).then(response => {
+        //         console.log('I got a response');
+        //         console.log(response);
+        //         let htmlSet;
+        //         for (let i = 0; i < response.data.length; i++) {
+        //             if (!htmlSet) {
+        //                 htmlSet = '<li>' + response.data[i] + '</li>'
+        //             } else {
+        //                 htmlSet += '<li>' + response.data[i] + '</li>'
+        //             }
+        //         }
+        //         console.log(htmlSet);
+        //         document.getElementById('list').innerHTML = htmlSet;
+        //         document.getElementById('list-para').innerHTML = ''
+        //     });
+        // })
+
+
+
+        const sendWho = () => {
+            document.getElementById('list-para').innerHTML = 'Retrieving Data...'
+            $('#list-button').prop('disabled', true);
+            fetch('/api/list')
+            .then(response => {
+                console.log('first response received')
+                return response.json()
+            }).catch((err) => {
+                console.log(err);
+                document.getElementById('list-para').innerHTML = 'Data retrieval failed.'
+                $('#list-button').prop('disabled', false);
+            }).then(response => {
+                console.log('I got a response');
+                console.log(response);
+                let fiveMinSet;
+                let tenMinSet;
+                let fifteenMinSet;
+                let twentyMinSet;
+
+                for (let i = 0; i < response['fiveMins'].length; i++) {
+                    if (!fiveMinSet) {
+                        fiveMinSet = '<li>' + response['fiveMins'][i] + '</li>'
+                    } else {
+                        fiveMinSet += '<li>' + response['fiveMins'][i] + '</li>'
+                    }
+                }
+
+                for (let i = 0; i < response['tenMins'].length; i++) {
+                    if (!tenMinSet) {
+                        tenMinSet = '<li>' + response['tenMins'][i] + '</li>'
+                    } else {
+                        tenMinSet += '<li>' + response['tenMins'][i] + '</li>'
+                    }
+                }
+
+                for (let i = 0; i < response['fifteenMins'].length; i++) {
+                    if (!fifteenMinSet) {
+                        fifteenMinSet = '<li>' + response['fifteenMins'][i] + '</li>'
+                    } else {
+                        fifteenMinSet += '<li>' + response['fifteenMins'][i] + '</li>'
+                    }
+                }
+
+                for (let i = 0; i < response['twentyMins'].length; i++) {
+                    if (!twentyMinSet) {
+                        twentyMinSet = '<li>' + response['twentyMins'][i] + '</li>'
+                    } else {
+                        twentyMinSet += '<li>' + response['twentyMins'][i] + '</li>'
+                    }
+                }
+
+                document.getElementById('5list').innerHTML = fiveMinSet;
+                document.getElementById('10list').innerHTML = tenMinSet;
+                document.getElementById('15list').innerHTML = fifteenMinSet;
+                document.getElementById('20list').innerHTML = twentyMinSet;
+                document.getElementById('list-para').innerHTML = ''
+                $('#list-button').prop('disabled', false);
+            }).catch((err) => {
+                console.log(err);
+                document.getElementById('list-para').innerHTML = 'Data retrieval failed.'
+                $('#list-button').prop('disabled', false); 
+            });
+}
+
+    document.addEventListener('DOMContentLoaded', function(){
+	    sendWho();
+	});
+    </script>
+    </body>
+</html>

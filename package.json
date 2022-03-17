@@ -1,0 +1,25 @@
+{
+    "name": "building-project",
+    "version": "0.0.1",
+    "description": "An automated project to find out who is in a given building",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "body-parser": "^1.15.2",
+        "dotenv": "^8.2.0",
+        "express": "^4.12.4",
+        "cors": "^2.8.5",
+        "axios": "^0.26.1"
+    },
+    "repository": {
+        "type": "git"
+    },
+    "keywords": [
+        "node",
+        "unifi"
+    ],
+    "license": "MIT"
+    }
+    
