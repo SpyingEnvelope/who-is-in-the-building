@@ -3,6 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 var axios = require('axios');
+const session = require('express-session');
+const passport = require('passport');
 
 const app = express();
 
@@ -15,6 +17,13 @@ app.use(function (req, res, next) {
 });
 
 app.use(express.static('public'));
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: { secure : false }
+}));
 
 let fiveMins = ['No one'];
 let tenMins = ['No one'];
