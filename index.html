@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html class="bg-dark">
     <head>
         <meta charset='UTF-8'>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Who is in the building?</title>
         <script src="jquery-3.6.0.min.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="bootstrap.min.css"></link>
     </head>
     <body>
-        <div id='root'>
-            <h1>List of people in the Step by Step Centre</h1>
+        <div id='root' class="container-fluid text-center bg-dark text-light">
+            <br>
+            <h1>List of people in the Centre</h1>
+            <br>
             <p id="list-para">
                 <h3>Who is in the building right now</h3>
                 <ul id="5list">
@@ -21,34 +25,10 @@
                 <h3>Who was in the building 20 minutes ago</h3>
                 <ul id="20list"> 
                 </ul>
-                <button id="list-button" onclick="sendWho()">Reload list</button>
+                <button id="list-button" class="btn btn-light" onclick="sendWho()">Reload list</button>
             </p>
         </div>
     <script>
-        // $(document).ready(function() {
-        //     document.getElementById('list-para').innerHTML = 'Retrieving Data...'
-        //     fetch('http://localhost:3000/api/who')
-        //     .then(response => {
-        //         console.log('first response received')
-        //         return response.json()
-        //     }).then(response => {
-        //         console.log('I got a response');
-        //         console.log(response);
-        //         let htmlSet;
-        //         for (let i = 0; i < response.data.length; i++) {
-        //             if (!htmlSet) {
-        //                 htmlSet = '<li>' + response.data[i] + '</li>'
-        //             } else {
-        //                 htmlSet += '<li>' + response.data[i] + '</li>'
-        //             }
-        //         }
-        //         console.log(htmlSet);
-        //         document.getElementById('list').innerHTML = htmlSet;
-        //         document.getElementById('list-para').innerHTML = ''
-        //     });
-        // })
-
-
 
         const sendWho = () => {
             document.getElementById('list-para').innerHTML = 'Retrieving Data...'
